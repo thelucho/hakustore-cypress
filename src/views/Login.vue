@@ -38,7 +38,7 @@
           >Password is required!</div>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block" :disabled="loading">
+          <button class="btn btn-primary btn-block btn-login" :disabled="loading">
             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
             <span>Login</span>
           </button>
@@ -85,7 +85,7 @@ export default {
         if (this.user.username && this.user.password) {
           this.$store.dispatch('auth/login', this.user).then(
             () => {
-              this.$router.push('/profile');
+              this.$router.push('/');
             },
             error => {
               this.loading = false;
@@ -108,9 +108,20 @@ label {
   margin-top: 10px;
 }
 
+.btn-login {
+  background-color: #389d88;
+  border-color: #389d88;
+}
+
+.btn-login:hover {
+  background-color: #2d8f7b;
+  border-color: #2d8f7b;
+}
+
 .card-container.card {
   max-width: 350px !important;
   padding: 40px 40px;
+  margin-top: 200px;
 }
 
 .card {

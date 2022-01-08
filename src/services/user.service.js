@@ -9,7 +9,8 @@ class UserService {
   }
 
   createProduct(product) {
-    axios.defaults.headers.common['Authorization'] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsInBhc3N3b3JkIjoiYWRtaW4iLCJpYXQiOjE2NDE1NzkyODAsImV4cCI6MTY0MTY2NTY4MH0.SJW4XiyUBmNHSrZ9UhMwGywbczqAedQx-xLRK9gM6T0`;
+    let accessToken = JSON.parse(localStorage.getItem('jwt'));
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     return axios.post(API_URL + 'products', product);
   }
 

@@ -95,14 +95,14 @@ export default {
   },
   methods: {
     getProducts() {
-      this.isLoading = !this.isLoading;
+      this.isLoading = true;
       UserService.getProducts().then(
       response => {
-        this.isLoading = !this.isLoading;
+        this.isLoading = false;
         this.products = response.data;
       },
       error => { 
-        this.isLoading = !this.isLoading;
+        this.isLoading = false;
         throw new Error(error)
       }
     );

@@ -2,10 +2,23 @@
   <div class="container">
     <header class="jumbotron text-center mt-4">
       <h2>HakuStore</h2>
-      <p>Bienvenidos al store de Hakuna</p>
+      <div v-if="currentUser">
+        <p>Bienvenidos al store de Hakuna</p>
+      </div>
+      <div v-else>
+        <p class="text-danger">
+          Contenido disponible solo para usuarios logueados!
+        </p>
+      </div>
     </header>
 
-    <div class="row">
+    <div class="row d-flex justify-content-center my-5 py-5" v-if="isLoading">
+      <div class="spinner-border text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <div class="row" v-if="products && !isLoading">
       <div
         class="col-12 col-sm-8 col-md-6 col-lg-3 mb-4"
         v-for="(prod, idx) in products"
@@ -32,12 +45,8 @@
     </div>
 
     <transition name="slide-fade">
-      <cart
-        v-show="currentUser && ordered"
-        :ordered="ordered"
-      ></cart>
+      <cart v-show="currentUser && ordered" :ordered="ordered"></cart>
     </transition>
-
   </div>
 </template>
 
@@ -54,16 +63,20 @@ export default {
     return {
       products: [],
       error: '',
+      isLoading: false
     };
   },
   created() {
+    this.isLoading = !this.isLoading;
     UserService.getProducts().then(
       response => {
+        this.isLoading = !this.isLoading;
         this.products = response.data;
       },
       error => {
+        this.isLoading = !this.isLoading;
         this.error = `Error: ${error}`;
-      }
+      },
     );
   },
   computed: {
@@ -125,10 +138,10 @@ h2 {
 /* Enter and leave animations can use different */
 /* durations and timing functions.              */
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active below version 2.1.8 */ {

@@ -1,7 +1,7 @@
 export const product = {
   namespaced: true,
   state: {
-    cart: [],
+    cart: []
   },
   actions: {
     addToCart({ commit, state }, product) {

@@ -23,6 +23,7 @@ export default {
       let order = cart.map((item) => {
         return `(${item.quantity}) ${item.product['title']}`
       });
+      // eslint-disable-next-line
       const orderMessage = JSON.stringify(order).replace(/[\[\]']+/g, '').split(',').join(', ').replaceAll('"', '');
 
       return orderMessage;

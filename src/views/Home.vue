@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <header class="jumbotron text-center mt-4">
+    <header data-cy="hero" class="jumbotron text-center mt-4">
       <h2>HakuStore</h2>
       <div v-if="currentUser">
         <p>Bienvenidos al store de Hakuna</p>
@@ -20,11 +20,12 @@
 
     <div class="row" v-if="products && !isLoading">
       <div
+        data-cy="products"
         class="col-12 col-sm-8 col-md-6 col-lg-3 mb-4"
         v-for="(prod, idx) in products"
         :key="idx"
       >
-        <div class="card">
+        <div data-cy="item" class="card">
           <div class="box-img">
             <img class="card-img my-3" :src="prod.image" />
           </div>
@@ -32,7 +33,7 @@
             <h5 class="card-title">{{ prod.title }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ prod.category }}</h6>
             <div class="buy d-flex justify-content-between align-items-center">
-              <div class="price text-success">
+              <div class="price">
                 <h5 class="mt-4">${{ prod.price }}</h5>
               </div>
               <a @click.prevent="addToCart(prod)" class="btn btn-danger mt-3">
@@ -133,6 +134,10 @@ h2 {
   width: fit-content;
   max-width: 150px;
   max-height: 150px;
+}
+
+.price {
+  color: #2b4dab;
 }
 
 /* Enter and leave animations can use different */

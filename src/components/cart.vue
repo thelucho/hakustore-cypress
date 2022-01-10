@@ -1,5 +1,5 @@
 <template>
-  <div class="alert alert-primary">
+  <div data-cy="cart" class="alert alert-primary">
     <font-awesome-icon icon="shopping-bag" />
     <a target="_blank" :href="`https://wa.me/5211234567890?text=${cart}`">Completar pedido ({{ count }} productos)</a>
     <div class="close" @click="removeOrder()">

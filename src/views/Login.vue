@@ -6,7 +6,7 @@
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
         class="profile-img-card"
       />
-      <form name="form" @submit.prevent="handleLogin">
+      <form data-cy="login" name="form" @submit.prevent="handleLogin">
         <div class="form-group">
           <label for="username">Username</label>
           <input
@@ -18,8 +18,7 @@
           />
           <div
             v-if="errors.has('username')"
-            class="alert alert-danger"
-            role="alert"
+            class="text-danger mt-1"
           >Username is required!</div>
         </div>
         <div class="form-group">
@@ -33,8 +32,7 @@
           />
           <div
             v-if="errors.has('password')"
-            class="alert alert-danger"
-            role="alert"
+            class="text-danger mt-1"
           >Password is required!</div>
         </div>
         <div class="form-group">
@@ -44,7 +42,10 @@
           </button>
         </div>
         <div class="form-group">
-          <div v-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+          <div v-if="message" class="alert alert-danger" role="alert">
+            <font-awesome-icon icon="exclamation-circle" />
+            {{message}}
+          </div>
         </div>
       </form>
     </div>
@@ -113,9 +114,9 @@ label {
   border-color: #389d88;
 }
 
-.btn-login:hover {
-  background-color: #2d8f7b;
-  border-color: #2d8f7b;
+.btn-login:hover, .btn-login:active, .btn-login:focus {
+  background-color: #2d8f7b !important;
+  border-color: #2d8f7b !important;
 }
 
 .card-container.card {
@@ -145,5 +146,14 @@ label {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+
+.alert-danger {
+  text-align: center;
+  color: white;
+  background-color: #fd6565;
+  border-color: #fd6565;
+  border-radius: 0px;
+  padding: 0.45rem 1.25rem;
 }
 </style>

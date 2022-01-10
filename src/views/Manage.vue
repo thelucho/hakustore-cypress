@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-md-4">
         <h6 class="mb-4">Agregar producto</h6>
-        <form @submit.prevent="addProduct()">
+        <form data-cy="add-product" @submit.prevent="addProduct()">
           <div class="form-group">
             <input v-model="item.title" type="text" class="form-control" name="title" placeholder="Titulo" />
           </div>
@@ -26,6 +26,7 @@
           </div>
 
           <button
+            :disabled="!isCompletedFields"
             type="submit"
             class="btn btn-primary w-100"
           >Agregar</button>
@@ -41,7 +42,7 @@
           </div>
         </div>
 
-        <ul class="list-group" v-if="products && !isLoading">
+        <ul data-cy="products-list" class="list-group" v-if="products && !isLoading">
           <li
             class="list-group-item d-flex justify-content-between align-items-center"
             v-for="(product, idx) in products.slice().reverse()" :key="idx">
@@ -92,6 +93,15 @@ export default {
   },
   created() {
     this.getProducts();
+  },
+  computed: {
+    isCompletedFields() {
+      return this.item.title !== '' &&
+        this.item.price !== null &&
+        this.item.description !== '' &&
+        this.item.category !== '' &&
+        this.item.image !== ''
+    }
   },
   methods: {
     getProducts() {

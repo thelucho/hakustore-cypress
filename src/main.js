@@ -9,6 +9,7 @@ import Vuex from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
+  faExclamationCircle,
   faHome,
   faUser,
   faUserPlus,
@@ -18,7 +19,7 @@ import {
   faTrash
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHome, faUser, faUserPlus, faSignInAlt, faSignOutAlt, faShoppingBag, faTrash);
+library.add(faExclamationCircle, faHome, faUser, faUserPlus, faSignInAlt, faSignOutAlt, faShoppingBag, faTrash);
 
 Vue.config.productionTip = false;
 
